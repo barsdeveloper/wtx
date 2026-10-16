@@ -22,6 +22,12 @@ impl<'exec, E> PostgresRecords<'exec, E> {
   ) -> Self {
     Self { common: PostgresCommonRecords::new(records, records_params, stmt, values_params) }
   }
+
+  /// Number of rows affected by the command that produced these records.
+  #[inline]
+  pub fn rows_affected(&self) -> u64 {
+    self.common.stmt.rows_len as u64
+  }
 }
 
 impl<'exec, E> Records<'exec> for PostgresRecords<'exec, E>
