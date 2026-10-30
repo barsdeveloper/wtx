@@ -3,7 +3,7 @@ use crate::{
     Records,
     client::postgres::{Postgres, PostgresCommonRecords, PostgresRecord, PostgresStatement, Ty},
   },
-  misc::Lease,
+  misc::{Lease, Usize},
 };
 use core::ops::Range;
 
@@ -26,7 +26,7 @@ impl<'exec, E> PostgresRecords<'exec, E> {
   /// Number of rows affected by the command that produced these records.
   #[inline]
   pub fn rows_affected(&self) -> u64 {
-    self.common.stmt.rows_len as u64
+    Usize::from(self.common.stmt.rows_len).into_u64()
   }
 
   /// Cached column names and types, including when no records were returned.

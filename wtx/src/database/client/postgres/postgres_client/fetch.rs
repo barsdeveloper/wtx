@@ -27,7 +27,7 @@ where
         let current = read_buffer.current();
         match MessageTy::try_from((&mut *cs, tag, current)) {
           Err(error) => error,
-          Ok(_) => crate::Error::from(crate::Error::from(DatabaseError::AbruptDisconnect)),
+          Ok(_) => crate::Error::from(DatabaseError::AbruptDisconnect),
         }
       };
       loop {
